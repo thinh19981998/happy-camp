@@ -2,7 +2,7 @@
 
 <div class="row">
   <h1 class="text-center">Edit Campground</h1>
-  <div class="col-6 offset-3">
+  <div class="d-flex flex-column align-items-center">
     <form
       action="/campgrounds/<%=campground._id%>?_method=PUT"
       class="needs-validation"
@@ -93,10 +93,10 @@
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Edit Campground</button>
+        <a href="/campgrounds/<%=campground._id%>" class="btn btn-primary"
+          >Back To Campground</a
+        >
       </div>
     </form>
-    <div>
-      <a href="/campgrounds/<%=campground._id%>">Back tocampground</a>
-    </div>
   </div>
 </div>
