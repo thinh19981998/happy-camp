@@ -9,7 +9,7 @@ const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 
 router
-  .route('/:page')
+  .route('/')
   .get(catchAsync(campgrounds.index))
   .post(
     isLoggedIn,

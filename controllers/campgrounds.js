@@ -7,7 +7,7 @@ const geocodingClient = mbxGeocoding({ accessToken: mapboxToken });
 
 module.exports.index = async (req, res) => {
   let perPage = 5;
-  let page = req.params.page || 1;
+  let page = req.query.page || 1;
 
   const campgrounds = await CampGround.find() // find tất cả các data
     .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
