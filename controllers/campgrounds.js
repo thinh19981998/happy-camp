@@ -6,8 +6,24 @@ const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapboxToken });
 
 module.exports.index = async (req, res) => {
-  const campgrounds = await CampGround.find({});
-  res.render('campgrounds/index', { campgrounds });
+  let perPage = 5;
+  let page = req.params.page || 1;
+
+  const campgrounds = await CampGround.find() // find tất cả các data
+    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+    .limit(perPage)
+    .exec((err, campgrounds) => {
+      CampGround.countDocuments((err, count) => {
+        // đếm để tính có bao nhiêu trang
+        if (err) return next(err);
+        // res.send(campgrounds); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+        res.render('campgrounds/index', {
+          campgrounds,
+          current: page,
+          pages: Math.ceil(count / perPage),
+        });
+      });
+    });
 };
 
 module.exports.renderNewForm = async (req, res) => {

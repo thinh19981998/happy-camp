@@ -32,8 +32,63 @@
   </div>
 </div>
 <%}%>
-<script>
-  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-   const campgrounds = {features:<%-JSON.stringify(campgrounds)%>};
-</script>
-<script src="/javascripts/clusterMap.js"></script>
+
+<!-- pagination -->
+
+<div class="d-flex justify-content-center">
+  <div class="row">
+    <% if(pages > 0) { %>
+    <nav class="mx-auto">
+      <ul class="pagination">
+        <!-- FIRST ITEM -->
+        <% if(current == 1) { %>
+        <li class="page-item disabled">
+          <a class="page-link" href="/">First</a>
+        </li>
+        <% } else { %>
+        <li class="page-item">
+          <a class="page-link" href="/">First</a>
+        </li>
+        <% } %>
+  
+        <!-- ITEMS  -->
+        <% var i = (Number(current) > 3 ? Number(current) - 2 : 1) %>  <% if(i !== 1) { %>
+        <li class="page-item disabled">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <% } %> <% for(; i <= (Number(current) + 2) && i <= pages; i++) { %>  <% if(i == current) { %>
+        <li class="page-item active">
+          <a class="page-link" href="/campgrounds/<%= i %>/"> <%= i %> </a>
+        </li>
+        <% } else { %>
+        <li class="page-item">
+          <a class="page-link" href="/campgrounds/<%= i %>/"> <%= i %> </a>
+        </li>
+        <% } %> <% if (i == Number(current) + 2 && i < pages) { %>
+        <li class="page-item disabled">
+          <a class="page-link" href="#">...</a>
+        </li>
+        <% } %> <% } %>
+  
+        <!-- LAST ITEM -->
+        <% if(current == pages) { %>
+        <li class="page-item disabled">
+          <a class="page-link" href="#"> Last </a>
+        </li>
+        <% } else { %>
+        <li class="page-item">
+          <a class="page-link" href="/campgrounds/<%= pages %>/"> Last </a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+    <% } %>
+  </div>
+</div>
+
+  <script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+     const campgrounds = {features:<%-JSON.stringify(campgrounds)%>};
+  </script>
+  <script src="/javascripts/clusterMap.js"></script>
+</div>
