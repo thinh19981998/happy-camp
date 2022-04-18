@@ -17,9 +17,17 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/stylesheets/app.css" />
+    <link rel="stylesheet" href="/stylesheets/loader.css" />
     <link rel="icon" href="/img/favicon.ico" />
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body class="d-flex flex-column" style="min-height: 100vh">
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
     <%-include('../partials/navbar')%>
 
     <main class="container mt-3">
@@ -32,5 +40,17 @@
       crossorigin="anonymous"
     ></script>
     <script src="/javascripts/validateForms.js"></script>
+
+    <script>
+      $(window).on('load', function () {
+        $('.loader-wrapper').fadeOut('slow');
+      });
+    </script>
+    <script>
+      const loadingSquare = document.querySelector('.loader-wrapper');
+      document.body.onbeforeunload = () => {
+        loadingSquare.style.display = 'flex';
+      };
+    </script>
   </body>
 </html>
