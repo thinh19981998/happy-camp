@@ -6,18 +6,19 @@ const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapboxToken });
 
 module.exports.index = async (req, res) => {
-  let perPage = 5;
+  let perPage = 6;
   let page = req.query.page || 1;
-
-  const campgrounds = await CampGround.find() // find tất cả các data
-    .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+  const allCampgrounds = await CampGround.find({});
+  await CampGround.find()
+    .skip(perPage * page - perPage)
     .limit(perPage)
+    .populate('reviews')
     .exec((err, campgrounds) => {
       CampGround.countDocuments((err, count) => {
-        // đếm để tính có bao nhiêu trang
         if (err) return next(err);
-        // res.send(campgrounds); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+
         res.render('campgrounds/index', {
+          allCampgrounds,
           campgrounds,
           current: page,
           pages: Math.ceil(count / perPage),
