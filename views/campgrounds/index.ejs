@@ -16,7 +16,9 @@
             </a>
           <div class="card-body">
             <h5 class="card-title text-capitalize">
-              <a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a>
+              <a href="/campgrounds/<%= campground._id %>" class="text-truncate d-inline-block" style="max-width: 250px;"
+                data-toggle="tooltip" data-placement="top" title="<%= campground.title %>"
+                ><%= campground.title %></a>
               <small class="text-muted" style="float: right;">$<%= campground.price %></small>
             </h5>
              <h6 class="card-subtitle">
@@ -98,6 +100,11 @@
     <% } %>
   </div>
 </div>
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
   <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
      const campgrounds = {features:<%-JSON.stringify(allCampgrounds)%>};
