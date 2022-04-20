@@ -9,9 +9,9 @@
         <div class="card indexCards shadow border-0 mt-4">
           <a href="/campgrounds/<%= campground._id %>">
             <% if (campground.images.length > 0){%>
-            <img id="campgroundCard" class="card-img-top" src="<%= campground.images[0].url %>">
+            <img id="campgroundCard" class="card-img-top" src="<%= campground.images[0].thumbnail %>">
             <% } else { %>
-            <img id="campgroundCard" class="card-img-top" src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/254415687.jpg?k=47ed904fa4d426dad09e67eac7a7544b37be6ceaa2baa7f5b98b3b54eb958f39&o=">
+            <img id="campgroundCard" class="card-img-top" src="https://via.placeholder.com/200"
             <% } %>
             </a>
           <div class="card-body">
