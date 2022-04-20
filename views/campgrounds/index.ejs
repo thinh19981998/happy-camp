@@ -3,11 +3,17 @@
 <h1 class="mt-3 text-center primary text-light bg-dark">All Campgrounds</h1>
 
 <div class="container">
-  <div class="row mb-3">
+  <div class="row mb-3 d-flex">
     <% for(let campground of campgrounds) { %>
       <div class="col-sm-12 col-md-6 col-lg-4">
         <div class="card indexCards shadow border-0 mt-4">
-          <a href="/campgrounds/<%= campground._id %>"><img id="campgroundCard" class="card-img-top" src="<%= campground.images[0].url %>"></a>
+          <a href="/campgrounds/<%= campground._id %>">
+            <% if (campground.images.length > 0){%>
+            <img id="campgroundCard" class="card-img-top" src="<%= campground.images[0].url %>">
+            <% } else { %>
+            <img id="campgroundCard" class="card-img-top" src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/254415687.jpg?k=47ed904fa4d426dad09e67eac7a7544b37be6ceaa2baa7f5b98b3b54eb958f39&o=">
+            <% } %>
+            </a>
           <div class="card-body">
             <h5 class="card-title text-capitalize">
               <a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a>
